@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "todo-frontend": "apps/todo-frontend",
+    "todo-frontend-e2e": "apps/todo-frontend-e2e"
+  }
+}
