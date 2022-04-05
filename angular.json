@@ -5,8 +5,6 @@
     "todo-domain": "libs/todo/domain",
     "todo-e2e": "apps/todo-e2e",
     "todo-feature-manage": "libs/todo/feature-manage",
-    "todo-feature-view": "libs/todo/feature-view",
-    "todo-frontend": "apps/todo-frontend",
-    "todo-frontend-e2e": "apps/todo-frontend-e2e"
+    "todo-feature-view": "libs/todo/feature-view"
   }
 }
