@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "shared-ui-components": "libs/shared/ui-components",
+    "shared-util-helper": "libs/shared/util-helper",
     "todo": "apps/todo",
     "todo-domain": "libs/todo/domain",
     "todo-e2e": "apps/todo-e2e",

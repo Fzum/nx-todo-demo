@@ -15,6 +15,12 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@nx-todo-demo/shared/ui-components": [
+        "libs/shared/ui-components/src/index.ts"
+      ],
+      "@nx-todo-demo/shared/util-helper": [
+        "libs/shared/util-helper/src/index.ts"
+      ],
       "@nx-todo-demo/todo/domain": ["libs/todo/domain/src/index.ts"],
       "@nx-todo-demo/todo/feature-manage": [
         "libs/todo/feature-manage/src/index.ts"
