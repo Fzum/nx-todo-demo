@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/todo/domain",
+  "sourceRoot": "libs/todo/domain/src",
+  "prefix": "todo",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/todo/domain"],
+      "options": {
+        "project": "libs/todo/domain/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/todo/domain/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/todo/domain/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/todo/domain"],
+      "options": {
+        "jestConfig": "libs/todo/domain/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/todo/domain/src/**/*.ts",
+          "libs/todo/domain/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:todo", "type:domain-logic"]
+}

@@ -1,0 +1,42 @@
+{
+  "projectType": "library",
+  "root": "libs/todo/feature-manage",
+  "sourceRoot": "libs/todo/feature-manage/src",
+  "prefix": "todo",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/angular:ng-packagr-lite",
+      "outputs": ["dist/libs/todo/feature-manage"],
+      "options": {
+        "project": "libs/todo/feature-manage/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/todo/feature-manage/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/todo/feature-manage/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/todo/feature-manage"],
+      "options": {
+        "jestConfig": "libs/todo/feature-manage/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/todo/feature-manage/src/**/*.ts",
+          "libs/todo/feature-manage/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": ["domain:todo", "type:feature"]
+}

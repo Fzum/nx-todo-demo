@@ -14,7 +14,13 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-todo-demo/todo/domain": ["libs/todo/domain/src/index.ts"],
+      "@nx-todo-demo/todo/feature-manage": [
+        "libs/todo/feature-manage/src/index.ts"
+      ],
+      "@nx-todo-demo/todo/feature-view": ["libs/todo/feature-view/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
