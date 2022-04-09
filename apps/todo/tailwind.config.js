@@ -7,6 +7,10 @@ module.exports = {
     ...createGlobPatternsForDependencies(__dirname),
   ],
   theme: {
+    container: {
+      center: true,
+      padding: '4rem',
+    },
     extend: {},
   },
   plugins: [],
