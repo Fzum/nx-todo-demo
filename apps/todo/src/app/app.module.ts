@@ -6,11 +6,10 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { TodoFeatureManageModule } from '@nx-todo-demo/todo/feature-manage';
 import { HttpClientModule } from '@angular/common/http';
-import { TodoFeatureViewModule } from '@nx-todo-demo/todo/feature-view';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SharedUiComponentsModule } from '@nx-todo-demo/shared/ui-components';
 
 @NgModule({
   declarations: [AppComponent, DashboardComponent],
@@ -19,16 +18,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     StoreModule.forRoot({}),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot(),
-    TodoFeatureManageModule,
     HttpClientModule,
-    TodoFeatureViewModule,
     RouterModule.forRoot([
       {
         path: '',
         pathMatch: 'full',
         redirectTo: 'dashboard',
       },
-      { path: '**', redirectTo: 'dashboard' },
       {
         path: 'dashboard',
         component: DashboardComponent,
@@ -47,7 +43,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
             (m) => m.TodoFeatureViewModule
           ),
       },
+      { path: '**', redirectTo: 'dashboard' },
     ]),
+    SharedUiComponentsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
