@@ -9,9 +9,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { TodoFeatureManageModule } from '@nx-todo-demo/todo/feature-manage';
 import { HttpClientModule } from '@angular/common/http';
 import { TodoFeatureViewModule } from '@nx-todo-demo/todo/feature-view';
+import { RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DashboardComponent],
   imports: [
     BrowserModule,
     StoreModule.forRoot({}),
@@ -20,6 +22,32 @@ import { TodoFeatureViewModule } from '@nx-todo-demo/todo/feature-view';
     TodoFeatureManageModule,
     HttpClientModule,
     TodoFeatureViewModule,
+    RouterModule.forRoot([
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'dashboard',
+      },
+      { path: '**', redirectTo: 'dashboard' },
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      {
+        path: 'manage',
+        loadChildren: () =>
+          import('@nx-todo-demo/todo/feature-manage').then(
+            (m) => m.TodoFeatureManageModule
+          ),
+      },
+      {
+        path: 'view',
+        loadChildren: () =>
+          import('@nx-todo-demo/todo/feature-view').then(
+            (m) => m.TodoFeatureViewModule
+          ),
+      },
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent],
