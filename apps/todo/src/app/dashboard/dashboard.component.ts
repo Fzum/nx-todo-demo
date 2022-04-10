@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CardConfiguration } from '../../../../../libs/shared/ui-components/src/lib/card/card-configuration.model';
+import { CardConfiguration } from '@nx-todo-demo/shared/ui-components';
 
 @Component({
   selector: 'nx-todo-demo-dashboard',
