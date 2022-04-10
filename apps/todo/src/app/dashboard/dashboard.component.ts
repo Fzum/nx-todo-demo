@@ -12,11 +12,13 @@ export class DashboardComponent {
   readonly viewCardConfig: CardConfiguration = {
     heading: 'View',
     description: 'Overview of all todos you created',
+    iconUrl: 'assets/view.png',
   };
 
   readonly manageCardConfig: CardConfiguration = {
     heading: 'Manage',
     description:
       'Manage your todos. Here you can create, delete and do other stuff.',
+    iconUrl: 'assets/manage.png',
   };
 }
