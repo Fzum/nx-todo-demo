@@ -11,9 +11,10 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedUiComponentsModule } from '@nx-todo-demo/shared/ui-components';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent, HeaderComponent],
+  declarations: [AppComponent, DashboardComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     StoreModule.forRoot({}),
