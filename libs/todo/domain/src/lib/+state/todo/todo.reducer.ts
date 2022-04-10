@@ -3,29 +3,30 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as TodoActions from './todo.actions';
 import { Todo } from '../../entities/todo';
+import { immerOn } from 'ngrx-immer/store';
 
 export const TODO_FEATURE_KEY = 'todo-todo';
 
 export interface TodoState extends EntityState<Todo> {
   selectedId?: string;
-  isLoaded: boolean;
+  isLoading: boolean;
 }
 
 export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: TodoState = todoAdapter.getInitialState({
-  isLoaded: false,
+  isLoading: false,
 });
 
 export const todoReducer = createReducer(
   initialState,
-  on(TodoActions.loadTodos, (state) => ({
-    ...state,
-    isLoaded: false,
-    error: null,
-  })),
-  on(TodoActions.loadTodoSuccess, (state, { todo }) =>
-    todoAdapter.upsertMany(todo, { ...state, isLoaded: true })
+  immerOn(TodoActions.loadTodos, (state: TodoState) => {
+    state.isLoading = true;
+  }),
+  on(TodoActions.loadTodoSuccess, (state: TodoState, { todos }) =>
+    todoAdapter.upsertMany(todos, { ...state, isLoading: false })
   ),
-  on(TodoActions.loadTodoFailure, (state) => ({ ...state }))
+  immerOn(TodoActions.loadTodoFailure, (state: TodoState) => {
+    state.isLoading = false;
+  })
 );

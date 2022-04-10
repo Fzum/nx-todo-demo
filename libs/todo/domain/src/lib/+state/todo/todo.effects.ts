@@ -12,7 +12,7 @@ export class TodoEffects {
       ofType(TodoActions.loadTodos),
       switchMap((action) =>
         this.todoDataService.load().pipe(
-          map((todo) => TodoActions.loadTodoSuccess({ todo })),
+          map((todo) => TodoActions.loadTodoSuccess({ todos: todo })),
           catchError(() => of(TodoActions.loadTodoFailure()))
         )
       )

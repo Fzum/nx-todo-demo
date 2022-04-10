@@ -7,7 +7,7 @@ const { selectAll, selectEntities } = todoAdapter.getSelectors();
 
 export const getTodoLoaded = createSelector(
   getTodoState,
-  (state: TodoState) => state.isLoaded
+  (state: TodoState) => state.isLoading
 );
 
 export const getAllTodo = createSelector(getTodoState, (state: TodoState) =>
