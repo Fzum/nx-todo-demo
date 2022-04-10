@@ -5,7 +5,6 @@ import { CardConfiguration } from '@nx-todo-demo/shared/ui-components';
 @Component({
   selector: 'nx-todo-demo-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent {
   constructor(public router: Router) {}

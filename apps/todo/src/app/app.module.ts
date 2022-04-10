@@ -10,9 +10,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SharedUiComponentsModule } from '@nx-todo-demo/shared/ui-components';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
+  declarations: [AppComponent, DashboardComponent, HeaderComponent],
   imports: [
     BrowserModule,
     StoreModule.forRoot({}),
