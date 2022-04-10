@@ -1,21 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 import { Todo } from '../entities/todo';
 
 @Injectable({ providedIn: 'root' })
 export class TodoDataService {
-  constructor(private http: HttpClient) {}
-
   load(): Observable<Todo[]> {
-    // Uncomment if needed
-    /*
-        const url = '...';
-        const params = new HttpParams().set('param', 'value');
-        const headers = new HttpHeaders().set('Accept', 'application/json');
-        return this.http.get<Todo[]>(url, {params, headers});
-        */
-
     return of([
       { id: 1, name: 'Lorem ipsum', description: 'Lorem ipsum dolor sit amet' },
       {
@@ -28,6 +17,6 @@ export class TodoDataService {
         name: 'Duis autem',
         description: 'Duis autem vel eum iriure dolor in hendrerit',
       },
-    ]);
+    ]).pipe(delay(500));
   }
 }

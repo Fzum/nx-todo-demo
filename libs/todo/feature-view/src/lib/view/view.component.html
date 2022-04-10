@@ -1,7 +1,7 @@
 <h1>todo-view</h1>
 
 <table class="table">
-  <tr *ngFor="let todo of todoList$ | async">
+  <tr *ngFor="let todo of todos$ | async">
     <td>{{ todo.id }}</td>
     <td>{{ todo.name }}</td>
     <td>{{ todo.description }}</td>

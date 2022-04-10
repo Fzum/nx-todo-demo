@@ -7,7 +7,7 @@ import { ViewFacade } from '@nx-todo-demo/todo/domain';
   styleUrls: ['./view.component.scss'],
 })
 export class ViewComponent implements OnInit {
-  todoList$ = this.viewFacade.todoList$;
+  todos$ = this.viewFacade.todos$;
 
   constructor(private viewFacade: ViewFacade) {}
 
