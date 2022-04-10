@@ -2,11 +2,13 @@ Header
 <div class="container bg-gray-100 flex flex-col justify-center gap-y-5
  md:flex-row md:gap-x-20 md:gap-y-0">
   <components-card
+    id="view-card"
     class="md:basis-1/2"
     [config]="viewCardConfig"
     (cta)="router.navigate(['view'])"
   ></components-card>
   <components-card
+    id="manager-card"
     class="md:basis-1/2"
     [config]="manageCardConfig"
     (cta)="router.navigate(['manage'])"
