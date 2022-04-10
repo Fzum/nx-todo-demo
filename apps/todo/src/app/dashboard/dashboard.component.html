@@ -1,8 +1,14 @@
 Header
 <div class="container bg-gray-100 flex flex-col justify-center gap-y-5
  md:flex-row md:gap-x-20 md:gap-y-0">
-  <components-card></components-card>
-  <components-card></components-card>
-  <!--  <button type="button" routerLink="/view">view</button>-->
-  <!--  <button type="button" routerLink="/manage">manage</button>-->
+  <components-card
+    class="md:basis-1/2"
+    [config]="viewCardConfig"
+    (cta)="router.navigate(['view'])"
+  ></components-card>
+  <components-card
+    class="md:basis-1/2"
+    [config]="manageCardConfig"
+    (cta)="router.navigate(['manage'])"
+  ></components-card>
 </div>
