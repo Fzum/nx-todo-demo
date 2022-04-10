@@ -1,41 +1,31 @@
-import { createReducer, on, Action } from '@ngrx/store';
-import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+import { createReducer, on } from '@ngrx/store';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 
 import * as TodoActions from './todo.actions';
 import { Todo } from '../../entities/todo';
 
 export const TODO_FEATURE_KEY = 'todo-todo';
 
-export interface State extends EntityState<Todo> {
-  selectedId?: string | number; // which Todo record has been selected
-  loaded: boolean; // has the Todo list been loaded
-  error?: string | null; // last known error (if any)
-}
-
-export interface TodoPartialState {
-  readonly [TODO_FEATURE_KEY]: State;
+export interface TodoState extends EntityState<Todo> {
+  selectedId?: string;
+  isLoaded: boolean;
 }
 
 export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
-export const initialState: State = todoAdapter.getInitialState({
-  // set initial required properties
-  loaded: false,
+export const initialState: TodoState = todoAdapter.getInitialState({
+  isLoaded: false,
 });
 
-const todoReducer = createReducer(
+export const todoReducer = createReducer(
   initialState,
-  on(TodoActions.loadTodo, (state) => ({
+  on(TodoActions.loadTodos, (state) => ({
     ...state,
-    loaded: false,
+    isLoaded: false,
     error: null,
   })),
   on(TodoActions.loadTodoSuccess, (state, { todo }) =>
-    todoAdapter.upsertMany(todo, { ...state, loaded: true })
+    todoAdapter.upsertMany(todo, { ...state, isLoaded: true })
   ),
-  on(TodoActions.loadTodoFailure, (state, { error }) => ({ ...state, error }))
+  on(TodoActions.loadTodoFailure, (state) => ({ ...state }))
 );
-
-export function reducer(state: State | undefined, action: Action) {
-  return todoReducer(state, action);
-}

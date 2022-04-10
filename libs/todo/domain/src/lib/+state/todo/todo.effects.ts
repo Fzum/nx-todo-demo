@@ -9,11 +9,11 @@ import { TodoDataService } from '../../infrastructure/todo.data.service';
 export class TodoEffects {
   loadTodo$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(TodoActions.loadTodo),
+      ofType(TodoActions.loadTodos),
       switchMap((action) =>
         this.todoDataService.load().pipe(
           map((todo) => TodoActions.loadTodoSuccess({ todo })),
-          catchError((error) => of(TodoActions.loadTodoFailure({ error })))
+          catchError(() => of(TodoActions.loadTodoFailure()))
         )
       )
     )

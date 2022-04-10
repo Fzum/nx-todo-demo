@@ -8,7 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 @NgModule({
   imports: [
     CommonModule,
-    StoreModule.forFeature(fromTodo.TODO_FEATURE_KEY, fromTodo.reducer),
+    StoreModule.forFeature(fromTodo.TODO_FEATURE_KEY, fromTodo.todoReducer),
     EffectsModule.forFeature([TodoEffects]),
   ],
 })
