@@ -17,6 +17,6 @@ export class TodoDataService {
         name: 'Duis autem',
         description: 'Duis autem vel eum iriure dolor in hendrerit',
       },
-    ]).pipe(delay(500));
+    ]);
   }
 }

@@ -4,7 +4,6 @@ import { ViewFacade } from '@nx-todo-demo/todo/domain';
 @Component({
   selector: 'todo-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss'],
 })
 export class ViewComponent implements OnInit {
   todos$ = this.viewFacade.todos$;
