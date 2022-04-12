@@ -35,9 +35,9 @@
         </div>
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
-            <a routerLink="/dashboard" class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Dashboard</a>
-            <a routerLink="/view" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">View</a>
-            <a routerLink="/manage" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Manage</a>
+            <a routerLink="/dashboard" [routerLinkActive]="'bg-gray-900'"  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" >Dashboard</a>
+            <a routerLink="/view" [routerLinkActive]="'bg-gray-900'"  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">View</a>
+            <a routerLink="/manage" [routerLinkActive]="'bg-gray-900'"  class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Manage</a>
           </div>
         </div>
       </div>
@@ -66,9 +66,14 @@
   <!-- Mobile menu, show/hide based on menu state. -->
   <div class="sm:hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <a routerLink="/dashboard" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
-      <a routerLink="/view" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">View</a>
-      <a routerLink="/manage" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Manage</a>
+      <a routerLink="/dashboard" [routerLinkActive]="'bg-gray-900'" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Dashboard</a>
+      <a routerLink="/view" [routerLinkActive]="'bg-gray-900'" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">View</a>
+      <a routerLink="/manage" [routerLinkActive]="'bg-gray-900'" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Manage</a>
     </div>
   </div>
 </nav>
+<header class="bg-gray-900 shadow">
+  <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+    <h1 class="text-xl  text-white">Welcome to the Nx Todo Application</h1>
+  </div>
+</header>
