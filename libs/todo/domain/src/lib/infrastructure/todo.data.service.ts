@@ -1,20 +1,20 @@
-import { Injectable } from '@angular/core';
-import { delay, Observable, of } from 'rxjs';
-import { Todo } from '../entities/todo';
+import {Injectable} from '@angular/core';
+import {Observable, of} from 'rxjs';
+import {Todo} from '../entities/todo';
 
 @Injectable({ providedIn: 'root' })
 export class TodoDataService {
   load(): Observable<Todo[]> {
     return of([
-      { id: 1, name: 'Lorem ipsum', description: 'Lorem ipsum dolor sit amet' },
+      { id: 1, name: 'Study', description: 'Lorem ipsum dolor sit amet' },
       {
         id: 2,
-        name: 'At vero eos',
+        name: 'Groceries',
         description: 'At vero eos et accusam et justo duo dolores',
       },
       {
         id: 3,
-        name: 'Duis autem',
+        name: 'Housekeeping',
         description: 'Duis autem vel eum iriure dolor in hendrerit',
       },
     ]);

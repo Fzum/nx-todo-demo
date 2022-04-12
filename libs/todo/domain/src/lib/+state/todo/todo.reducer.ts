@@ -28,5 +28,8 @@ export const todoReducer = createReducer(
   ),
   immerOn(TodoActions.loadTodoFailure, (state: TodoState) => {
     state.isLoading = false;
-  })
+  }),
+  on(TodoActions.removeTodo, (state: TodoState, { todo }) =>
+    todoAdapter.removeOne(todo.id, state)
+  )
 );

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ViewFacade } from '@nx-todo-demo/todo/domain';
+import {Todo, ViewFacade} from '@nx-todo-demo/todo/domain';
+import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
 
 @Component({
   selector: 'todo-view',
@@ -7,6 +8,7 @@ import { ViewFacade } from '@nx-todo-demo/todo/domain';
 })
 export class ViewComponent implements OnInit {
   todos$ = this.viewFacade.todos$;
+  buttonSeverity = ButtonSeverity;
 
   constructor(private viewFacade: ViewFacade) {}
 
@@ -16,5 +18,9 @@ export class ViewComponent implements OnInit {
 
   load(): void {
     this.viewFacade.load();
+  }
+
+  delete(todo: Todo) {
+    this.viewFacade.delete(todo);
   }
 }

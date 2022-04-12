@@ -1,14 +1,25 @@
 <span>home > view</span>
 <div class="bg-gradient-to-r from-sky-500 to-indigo-500 rounded-lg p-4">
-  <div class="flex flex-col items-center">
-    <h1>todo-view</h1>
+    <div class="flex flex-col items-center">
+        <h1>todo-view</h1>
 
-    <table class="table-auto">
-      <tr *ngFor="let todo of todos$ | async">
-        <td>{{ todo.id }}</td>
-        <td>{{ todo.name }}</td>
-        <td>{{ todo.description }}</td>
-      </tr>
-    </table>
-  </div>
+        <table class="table-auto">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let todo of todos$ | async">
+                <td>{{ todo.name }}</td>
+                <td>{{ todo.description }}</td>
+                <td>
+                    <components-button [severity]="buttonSeverity.DANGER" [txt]="'Löschen'" (clicked)="delete(todo)"></components-button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
