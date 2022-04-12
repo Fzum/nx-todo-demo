@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { filter, map } from 'rxjs';
+import { filter, map, Subscription } from 'rxjs';
 
 const defaultHeading = 'Welcome to NX Todo';
 
@@ -8,7 +8,7 @@ const defaultHeading = 'Welcome to NX Todo';
   selector: 'nx-todo-demo-header',
   templateUrl: './header.component.html',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   heading = defaultHeading;
 
   private urlHeadingMap = new Map<string, string>([
@@ -16,8 +16,10 @@ export class HeaderComponent {
     ['manage', 'Manage your Todos'],
   ]);
 
+  private sub: Subscription;
+
   constructor(private router: Router) {
-    router.events
+    this.sub = router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         map((e) => e as NavigationEnd)
@@ -30,5 +32,9 @@ export class HeaderComponent {
           ? (this.urlHeadingMap.get(urlKey) as string)
           : defaultHeading;
       });
+  }
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
   }
 }
