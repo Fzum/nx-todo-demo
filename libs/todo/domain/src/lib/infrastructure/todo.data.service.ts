@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Observable, of} from 'rxjs';
-import {Todo} from '../entities/todo';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { Todo } from '../entities/todo';
 
 @Injectable({ providedIn: 'root' })
 export class TodoDataService {
@@ -14,6 +14,31 @@ export class TodoDataService {
       },
       {
         id: 3,
+        name: 'Housekeeping',
+        description: 'Duis autem vel eum iriure dolor in hendrerit',
+      },
+      {
+        id: 3,
+        name: 'Housekeeping',
+        description: 'Duis autem vel eum iriure dolor in hendrerit',
+      },
+      {
+        id: 4,
+        name: 'Housekeeping',
+        description: 'Duis autem vel eum iriure dolor in hendrerit',
+      },
+      {
+        id: 5,
+        name: 'Housekeeping',
+        description: 'Duis autem vel eum iriure dolor in hendrerit',
+      },
+      {
+        id: 6,
+        name: 'Housekeeping',
+        description: 'Duis autem vel eum iriure dolor in hendrerit',
+      },
+      {
+        id: 7,
         name: 'Housekeeping',
         description: 'Duis autem vel eum iriure dolor in hendrerit',
       },
