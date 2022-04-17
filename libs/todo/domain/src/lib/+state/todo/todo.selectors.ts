@@ -5,7 +5,7 @@ export const getTodoState = createFeatureSelector<TodoState>(TODO_FEATURE_KEY);
 
 const { selectAll, selectEntities } = todoAdapter.getSelectors();
 
-export const getTodoLoaded = createSelector(
+export const getIsTodoLoading = createSelector(
   getTodoState,
   (state: TodoState) => state.isLoading
 );

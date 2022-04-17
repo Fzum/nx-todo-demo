@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Todo, ViewFacade} from '@nx-todo-demo/todo/domain';
+import { Todo, ViewFacade } from '@nx-todo-demo/todo/domain';
 import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
 
 @Component({
@@ -8,6 +8,7 @@ import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
 })
 export class ViewComponent implements OnInit {
   todos$ = this.viewFacade.todos$;
+  isLoading$ = this.viewFacade.isLoading$;
   buttonSeverity = ButtonSeverity;
 
   constructor(private viewFacade: ViewFacade) {}

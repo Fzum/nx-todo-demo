@@ -7,7 +7,7 @@ import * as TodoSelectors from '../+state/todo/todo.selectors';
 
 @Injectable({ providedIn: 'root' })
 export class ManageFacade {
-  loaded$ = this.store.pipe(select(TodoSelectors.getTodoLoaded));
+  loaded$ = this.store.pipe(select(TodoSelectors.getIsTodoLoading));
   todoList$ = this.store.pipe(select(TodoSelectors.getAllTodo));
   selectedTodo$ = this.store.pipe(select(TodoSelectors.getSelected));
 

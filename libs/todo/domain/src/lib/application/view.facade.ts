@@ -8,7 +8,7 @@ import { Todo } from '../entities/todo';
 
 @Injectable({ providedIn: 'root' })
 export class ViewFacade {
-  loaded$ = this.store.select(TodoSelectors.getTodoLoaded);
+  isLoading$ = this.store.select(TodoSelectors.getIsTodoLoading);
   todos$ = this.store.select(TodoSelectors.getAllTodo);
   selectedTodo$ = this.store.select(TodoSelectors.getSelected);
 
