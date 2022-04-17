@@ -8,13 +8,14 @@ import { immerOn } from 'ngrx-immer/store';
 export const TODO_FEATURE_KEY = 'todo-todo';
 
 export interface TodoState extends EntityState<Todo> {
-  selectedId?: string;
+  selectedIds: number[];
   isLoading: boolean;
 }
 
 export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 
 export const initialState: TodoState = todoAdapter.getInitialState({
+  selectedIds: [],
   isLoading: false,
 });
 
@@ -31,5 +32,18 @@ export const todoReducer = createReducer(
   }),
   on(TodoActions.removeTodo, (state: TodoState, { todo }) =>
     todoAdapter.removeOne(todo.id, state)
-  )
+  ),
+  immerOn(TodoActions.selectTodo, (state: TodoState, { todo }) => {
+    state.selectedIds.push(todo.id);
+  }),
+  immerOn(TodoActions.deselectTodo, (state: TodoState, { todo }) => {
+    const selectedIds = state.selectedIds;
+    selectedIds.splice(selectedIds.indexOf(todo.id), 1);
+  }),
+  immerOn(TodoActions.selectAll, (state: TodoState) => {
+    state.selectedIds = [...state.ids] as number[];
+  }),
+  immerOn(TodoActions.deSelectAll, (state: TodoState) => {
+    state.selectedIds = [];
+  })
 );

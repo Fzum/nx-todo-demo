@@ -19,13 +19,13 @@ export const getTodoEntities = createSelector(
   (state: TodoState) => selectEntities(state)
 );
 
-export const getSelectedId = createSelector(
+export const getSelectedIds = createSelector(
   getTodoState,
-  (state: TodoState) => state.selectedId
+  (state: TodoState) => state.selectedIds
 );
 
 export const getSelected = createSelector(
-  getTodoEntities,
-  getSelectedId,
-  (entities, selectedId) => selectedId && entities[selectedId]
+  getAllTodo,
+  getSelectedIds,
+  (todos, selectedIds) => todos.filter((t) => selectedIds.includes(t.id))
 );

@@ -14,3 +14,16 @@ export const removeTodo = createAction(
   '[Todo Page] Remove Todo',
   props<{ todo: Todo }>()
 );
+
+export const selectTodo = createAction(
+  '[Todo Page] Select Todo',
+  props<{ todo: Todo }>()
+);
+
+export const deselectTodo = createAction(
+  '[Todo Page] Deselect Todo',
+  props<{ todo: Todo }>()
+);
+
+export const selectAll = createAction('[Todo Page] Select All');
+export const deSelectAll = createAction('[Todo Page] Deselect All');
