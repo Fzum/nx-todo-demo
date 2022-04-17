@@ -26,6 +26,7 @@
     "@ngrx/store-devtools": "13.0.2",
     "@nrwl/angular": "13.10.2",
     "immer": "^9.0.12",
+    "lodash": "^4.17.21",
     "ngrx-immer": "^2.0.0",
     "rxjs": "~7.4.0",
     "tslib": "^2.0.0",
@@ -53,6 +54,7 @@
     "@storybook/core-server": "~6.4.12",
     "@storybook/manager-webpack5": "~6.4.12",
     "@types/jest": "27.0.2",
+    "@types/lodash": "^4.14.181",
     "@types/node": "16.11.7",
     "@typescript-eslint/eslint-plugin": "5.18.0",
     "@typescript-eslint/parser": "5.18.0",
@@ -76,4 +78,3 @@
     "webpack": "^5.64.0"
   }
 }
-
