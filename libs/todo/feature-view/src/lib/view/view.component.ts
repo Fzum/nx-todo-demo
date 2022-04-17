@@ -14,11 +14,11 @@ export class ViewComponent implements OnInit {
   constructor(private viewFacade: ViewFacade) {}
 
   ngOnInit() {
-    this.load();
+    this.loadTodos();
   }
 
-  load(): void {
-    this.viewFacade.load();
+  loadTodos(): void {
+    this.viewFacade.loadTodos();
   }
 
   delete(todo: Todo) {

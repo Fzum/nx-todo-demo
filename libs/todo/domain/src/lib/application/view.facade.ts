@@ -14,7 +14,7 @@ export class ViewFacade {
 
   constructor(private store: Store<fromTodo.TodoState>) {}
 
-  load(): void {
+  loadTodos(): void {
     this.store.dispatch(loadTodos());
   }
 
