@@ -41,8 +41,10 @@ export class ViewComponent implements OnInit {
   }
 
   toggleAllSelection() {
-    this.getSelectedTodos$().subscribe((selectedTodos) => {
-      if (selectedTodos.length > 0) { // change to all selected!
+    this.isAllSelected()
+      .pipe(first())
+      .subscribe((isAllSelected) => {
+      if (isAllSelected) {
         this.viewFacade.deselectAll();
       } else {
         this.viewFacade.selectAll();
