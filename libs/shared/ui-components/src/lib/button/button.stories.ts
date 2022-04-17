@@ -39,12 +39,10 @@ export const Secondary = Template.bind({});
 Secondary.args = {
   severity: ButtonSeverity.SECONDARY,
   txt: 'Secondary',
-  state: 'Secondary',
 };
 
 export const Danger = Template.bind({});
 Danger.args = {
   severity: ButtonSeverity.DANGER,
   txt: 'Danger',
-  state: 'Danger',
 };
