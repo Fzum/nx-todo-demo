@@ -23,6 +23,9 @@ export class ViewFacade {
   selectedTodos$: Observable<Todo[]> = this.store.select(
     TodoSelectors.getSelected
   );
+  isAllSelected$: Observable<boolean> = this.store.select(
+    TodoSelectors.isAllSelected
+  );
 
   constructor(private store: Store<fromTodo.TodoState>) {}
 

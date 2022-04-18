@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TODO_FEATURE_KEY, TodoState, todoAdapter } from './todo.reducer';
+import { TODO_FEATURE_KEY, todoAdapter, TodoState } from './todo.reducer';
+import * as _ from 'lodash';
 
 export const getTodoState = createFeatureSelector<TodoState>(TODO_FEATURE_KEY);
 
@@ -28,4 +29,13 @@ export const getSelected = createSelector(
   getAllTodo,
   getSelectedIds,
   (todos, selectedIds) => todos.filter((t) => selectedIds.includes(t.id))
+);
+
+export const isAllSelected = createSelector(
+  getAllTodo,
+  getSelectedIds,
+  (todos, selectedIds) => {
+    const allTodoIds = todos.map((t) => t.id);
+    return _.isEqual(allTodoIds.sort(), [...selectedIds].sort());
+  }
 );

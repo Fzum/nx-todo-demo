@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Todo, ViewFacade} from '@nx-todo-demo/todo/domain';
-import {ButtonSeverity} from '@nx-todo-demo/shared/ui-components';
-import {first, map, withLatestFrom} from 'rxjs';
-import * as _ from 'lodash';
+import { Component, OnInit } from '@angular/core';
+import { Todo, ViewFacade } from '@nx-todo-demo/todo/domain';
+import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
+import { first, map } from 'rxjs';
 
 @Component({
   selector: 'todo-view',
@@ -11,12 +10,12 @@ import * as _ from 'lodash';
 export class ViewComponent implements OnInit {
   todos$ = this.viewFacade.todos$;
   isLoading$ = this.viewFacade.isLoading$;
+  isAllSelected$ = this.viewFacade.isAllSelected$;
   selectedTodos$ = this.viewFacade.selectedTodos$;
 
   buttonSeverity = ButtonSeverity;
 
-  constructor(private viewFacade: ViewFacade) {
-  }
+  constructor(private viewFacade: ViewFacade) {}
 
   ngOnInit() {
     this.loadTodos();
@@ -41,9 +40,7 @@ export class ViewComponent implements OnInit {
   }
 
   toggleAllSelection() {
-    this.isAllSelected()
-      .pipe(first())
-      .subscribe((isAllSelected) => {
+    this.isAllSelected$.pipe(first()).subscribe((isAllSelected) => {
       if (isAllSelected) {
         this.viewFacade.deselectAll();
       } else {
@@ -54,18 +51,8 @@ export class ViewComponent implements OnInit {
 
   isSelected(todo: Todo) {
     return this.getSelectedTodos$().pipe(
-      map(selectedTodos => selectedTodos.includes(todo))
+      map((selectedTodos) => selectedTodos.includes(todo))
     );
-  }
-
-  isAllSelected() {
-    return this.getSelectedTodos$().pipe(
-      withLatestFrom(this.todos$),
-      map(([selectedTodos, allTodos]) => {
-        const mapAndSort = (todos: Todo[]) => todos.map(t => t.id).sort();
-        return _.isEqual(mapAndSort(selectedTodos), mapAndSort(allTodos));
-      })
-    )
   }
 
   private getSelectedTodos$() {
