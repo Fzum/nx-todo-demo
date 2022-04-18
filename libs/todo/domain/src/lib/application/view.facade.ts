@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
-  deSelectAll,
+  deselectMany,
   deselectTodo,
   loadTodos,
   removeTodo,
-  selectAll,
+  searchTodo,
+  selectMany,
   selectTodo,
 } from '../+state/todo/todo.actions';
 import * as fromTodo from '../+state/todo/todo.reducer';
@@ -20,8 +21,14 @@ export class ViewFacade {
     TodoSelectors.getIsTodoLoading
   );
   todos$: Observable<Todo[]> = this.store.select(TodoSelectors.getAllTodo);
+  searchedTodos$: Observable<Todo[]> = this.store.select(
+    TodoSelectors.getSearchedTodos
+  );
   selectedTodos$: Observable<Todo[]> = this.store.select(
     TodoSelectors.getSelected
+  );
+  isAllSearchedSelected$: Observable<boolean> = this.store.select(
+    TodoSelectors.isAllSearchedSelected
   );
   isAllSelected$: Observable<boolean> = this.store.select(
     TodoSelectors.isAllSelected
@@ -45,11 +52,15 @@ export class ViewFacade {
     this.store.dispatch(selectTodo({ todo }));
   }
 
-  selectAll() {
-    this.store.dispatch(selectAll());
+  selectMany(todos: Todo[]) {
+    this.store.dispatch(selectMany({ todos }));
   }
 
-  deselectAll() {
-    this.store.dispatch(deSelectAll());
+  deselectMany(todos: Todo[]) {
+    this.store.dispatch(deselectMany({ todos }));
+  }
+
+  searchTodos(searchTerm: string) {
+    this.store.dispatch(searchTodo({ searchTerm }));
   }
 }

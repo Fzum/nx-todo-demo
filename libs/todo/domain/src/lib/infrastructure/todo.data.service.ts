@@ -18,11 +18,6 @@ export class TodoDataService {
         description: 'Duis autem vel eum iriure dolor in hendrerit',
       },
       {
-        id: 3,
-        name: 'Housekeeping',
-        description: 'Duis autem vel eum iriure dolor in hendrerit',
-      },
-      {
         id: 4,
         name: 'Housekeeping',
         description: 'Duis autem vel eum iriure dolor in hendrerit',

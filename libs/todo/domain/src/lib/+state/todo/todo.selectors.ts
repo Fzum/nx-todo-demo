@@ -8,27 +8,40 @@ const { selectAll, selectEntities } = todoAdapter.getSelectors();
 
 export const getIsTodoLoading = createSelector(
   getTodoState,
-  (state: TodoState) => state.isLoading
+  (state) => state.isLoading
 );
 
-export const getAllTodo = createSelector(getTodoState, (state: TodoState) =>
+export const getAllTodo = createSelector(getTodoState, (state) =>
   selectAll(state)
 );
 
-export const getTodoEntities = createSelector(
-  getTodoState,
-  (state: TodoState) => selectEntities(state)
+export const getTodoEntities = createSelector(getTodoState, (state) =>
+  selectEntities(state)
 );
 
 export const getSelectedIds = createSelector(
   getTodoState,
-  (state: TodoState) => state.selectedIds
+  (state) => state.selectedIds
 );
 
 export const getSelected = createSelector(
   getAllTodo,
   getSelectedIds,
   (todos, selectedIds) => todos.filter((t) => selectedIds.includes(t.id))
+);
+
+export const getSearchedTodos = createSelector(
+  getTodoState,
+  (state) => state.searchedTodos
+);
+
+export const isAllSearchedSelected = createSelector(
+  getSearchedTodos,
+  getSelectedIds,
+  (todos, selectedIds) => {
+    const searchedTodoIds = todos.map((t) => t.id);
+    return searchedTodoIds.every((id) => selectedIds.includes(id));
+  }
 );
 
 export const isAllSelected = createSelector(

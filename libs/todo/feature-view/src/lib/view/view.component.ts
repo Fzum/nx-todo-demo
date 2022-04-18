@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo, ViewFacade } from '@nx-todo-demo/todo/domain';
 import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
-import { first, map } from 'rxjs';
+import { first, map, withLatestFrom } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -10,25 +10,19 @@ import { FormControl } from '@angular/forms';
 })
 export class ViewComponent implements OnInit {
   todos$ = this.viewFacade.todos$;
+  searchedTodos$ = this.viewFacade.searchedTodos$;
   isLoading$ = this.viewFacade.isLoading$;
+  isAllSearchedSelected$ = this.viewFacade.isAllSearchedSelected$;
   isAllSelected$ = this.viewFacade.isAllSelected$;
   selectedTodos$ = this.viewFacade.selectedTodos$;
 
   buttonSeverity = ButtonSeverity;
 
   searchFc = new FormControl('');
-  searchedTodos$ = this.viewFacade.todos$;
 
   constructor(private viewFacade: ViewFacade) {
-    this.searchFc.valueChanges.subscribe(
-      (searchTerm) =>
-        (this.searchedTodos$ = this.todos$.pipe(
-          map((todos) =>
-            todos.filter((t) =>
-              t.name.toLowerCase().includes(searchTerm.toLowerCase())
-            )
-          )
-        ))
+    this.searchFc.valueChanges.subscribe((searchTerm) =>
+      this.viewFacade.searchTodos(searchTerm)
     );
   }
 
@@ -58,14 +52,16 @@ export class ViewComponent implements OnInit {
     });
   }
 
-  toggleAllSelection() {
-    this.isAllSelected$.pipe(first()).subscribe((isAllSelected) => {
-      if (isAllSelected) {
-        this.viewFacade.deselectAll();
-      } else {
-        this.viewFacade.selectAll();
-      }
-    });
+  toggleManySelection() {
+    this.isAllSearchedSelected$
+      .pipe(first(), withLatestFrom(this.searchedTodos$))
+      .subscribe(([isAllSelected, searchedTodos]) => {
+        if (isAllSelected) {
+          this.viewFacade.deselectMany(searchedTodos);
+        } else {
+          this.viewFacade.selectMany(searchedTodos);
+        }
+      });
   }
 
   isSelected(todo: Todo) {

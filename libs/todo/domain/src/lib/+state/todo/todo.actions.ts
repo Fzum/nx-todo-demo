@@ -25,5 +25,17 @@ export const deselectTodo = createAction(
   props<{ todo: Todo }>()
 );
 
-export const selectAll = createAction('[Todo Page] Select All');
-export const deSelectAll = createAction('[Todo Page] Deselect All');
+export const selectMany = createAction(
+  '[Todo Page] Select Many',
+  props<{ todos: Todo[] }>()
+);
+
+export const deselectMany = createAction(
+  '[Todo Page] Deselect Many',
+  props<{ todos: Todo[] }>()
+);
+
+export const searchTodo = createAction(
+  '[Todo Page] Search Todo',
+  props<{ searchTerm: string }>()
+);
