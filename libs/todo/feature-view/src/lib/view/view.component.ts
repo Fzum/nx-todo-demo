@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Todo, ViewFacade } from '@nx-todo-demo/todo/domain';
 import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
 import { first, map } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'todo-view',
@@ -15,7 +16,25 @@ export class ViewComponent implements OnInit {
 
   buttonSeverity = ButtonSeverity;
 
-  constructor(private viewFacade: ViewFacade) {}
+  searchFc = new FormControl('');
+  searchedTodos$ = this.viewFacade.todos$;
+
+  constructor(private viewFacade: ViewFacade) {
+    this.searchFc.valueChanges.subscribe(
+      (searchTerm) =>
+        (this.searchedTodos$ = this.todos$.pipe(
+          map((todos) =>
+            todos.filter((t) =>
+              t.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          )
+        ))
+    );
+  }
+
+  get searchTerm() {
+    return this.searchFc.value;
+  }
 
   ngOnInit() {
     this.loadTodos();
