@@ -4,6 +4,7 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import * as TodoActions from './todo.actions';
 import { Todo } from '../../entities/todo';
 import { immerOn } from 'ngrx-immer/store';
+import produce from 'immer';
 
 export const TODO_FEATURE_KEY = 'todo-todo';
 
@@ -31,7 +32,12 @@ export const todoReducer = createReducer(
     state.isLoading = false;
   }),
   on(TodoActions.removeTodo, (state: TodoState, { todo }) =>
-    todoAdapter.removeOne(todo.id, state)
+    todoAdapter.removeOne(
+      todo.id,
+      produce(state, (draft) => {
+        draft.selectedIds.splice(draft.selectedIds.indexOf(todo.id), 1);
+      })
+    )
   ),
   immerOn(TodoActions.selectTodo, (state: TodoState, { todo }) => {
     state.selectedIds.push(todo.id);
