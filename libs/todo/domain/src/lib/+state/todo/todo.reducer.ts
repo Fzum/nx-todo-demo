@@ -42,7 +42,8 @@ export const todoReducer = createReducer(
     todoAdapter.removeOne(
       todo.id,
       produce(state, (draft) => {
-        draft.selectedIds.splice(draft.selectedIds.indexOf(todo.id), 1);
+        _.remove(draft.selectedIds, (t) => t === todo.id);
+        _.remove(draft.searchedTodos, (t) => t.id === todo.id);
       })
     )
   ),
