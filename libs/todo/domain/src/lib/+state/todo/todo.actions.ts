@@ -1,5 +1,5 @@
-import { createAction, props } from '@ngrx/store';
-import { Todo } from '../../entities/todo';
+import {createAction, props} from '@ngrx/store';
+import {Todo} from '../../entities/todo';
 
 export const loadTodos = createAction('[Todo Page] Load Todos');
 
@@ -33,4 +33,8 @@ export const selectMany = createAction(
 export const deselectMany = createAction(
   '[Todo Page] Deselect Many',
   props<{ todos: Todo[] }>()
+);
+
+export const deleteSelected = createAction(
+  '[Todo Page] Delete Selected',
 );

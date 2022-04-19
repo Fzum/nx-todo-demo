@@ -1,14 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Todo, ViewFacade } from '@nx-todo-demo/todo/domain';
-import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
-import {
-  BehaviorSubject,
-  combineLatest,
-  first,
-  map,
-  withLatestFrom,
-} from 'rxjs';
-import { FormControl } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Todo, ViewFacade} from '@nx-todo-demo/todo/domain';
+import {ButtonSeverity} from '@nx-todo-demo/shared/ui-components';
+import {BehaviorSubject, combineLatest, first, map, withLatestFrom,} from 'rxjs';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'todo-view',
@@ -91,6 +85,10 @@ export class ViewComponent implements OnInit {
     return this.getSelectedTodos$().pipe(
       map((selectedTodos) => selectedTodos.includes(todo))
     );
+  }
+
+  isAnyTodoSelected$() {
+    return this.getSelectedTodos$().pipe(map(t => t.length > 0))
   }
 
   private getSelectedTodos$() {

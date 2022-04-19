@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
 import {
+  deleteSelected,
   deselectMany,
   deselectTodo,
   loadTodos,
@@ -48,5 +49,9 @@ export class ViewFacade {
 
   deselectMany(todos: Todo[]) {
     this.store.dispatch(deselectMany({ todos }));
+  }
+
+  deleteSelected() {
+    this.store.dispatch(deleteSelected())
   }
 }

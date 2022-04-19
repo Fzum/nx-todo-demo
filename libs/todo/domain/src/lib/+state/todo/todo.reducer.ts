@@ -1,9 +1,9 @@
-import { createReducer, on } from '@ngrx/store';
-import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
+import {createReducer, on} from '@ngrx/store';
+import {createEntityAdapter, EntityAdapter, EntityState} from '@ngrx/entity';
 
 import * as TodoActions from './todo.actions';
-import { Todo } from '../../entities/todo';
-import { immerOn } from 'ngrx-immer/store';
+import {Todo} from '../../entities/todo';
+import {immerOn} from 'ngrx-immer/store';
 import produce from 'immer';
 import * as _ from 'lodash';
 
@@ -26,7 +26,7 @@ export const todoReducer = createReducer(
   immerOn(TodoActions.loadTodos, (state: TodoState) => {
     state.isLoading = true;
   }),
-  on(TodoActions.loadTodoSuccess, (state: TodoState, { todos }) =>
+  on(TodoActions.loadTodoSuccess, (state: TodoState, {todos}) =>
     todoAdapter.upsertMany(todos, {
       ...state,
       isLoading: false,
@@ -36,7 +36,7 @@ export const todoReducer = createReducer(
   immerOn(TodoActions.loadTodoFailure, (state: TodoState) => {
     state.isLoading = false;
   }),
-  on(TodoActions.removeTodo, (state: TodoState, { todo }) =>
+  on(TodoActions.removeTodo, (state: TodoState, {todo}) =>
     todoAdapter.removeOne(
       todo.id,
       produce(state, (draft) => {
@@ -44,22 +44,25 @@ export const todoReducer = createReducer(
       })
     )
   ),
-  immerOn(TodoActions.selectTodo, (state: TodoState, { todo }) => {
+  immerOn(TodoActions.selectTodo, (state: TodoState, {todo}) => {
     if (!state.selectedIds.includes(todo.id)) {
       state.selectedIds.push(todo.id);
     }
   }),
-  immerOn(TodoActions.deselectTodo, (state: TodoState, { todo }) => {
+  immerOn(TodoActions.deselectTodo, (state: TodoState, {todo}) => {
     const selectedIds = state.selectedIds;
     selectedIds.splice(selectedIds.indexOf(todo.id), 1);
   }),
-  immerOn(TodoActions.selectMany, (state: TodoState, { todos }) => {
+  immerOn(TodoActions.selectMany, (state: TodoState, {todos}) => {
     state.selectedIds = _.union(
       state.selectedIds,
       todos.map((t) => t.id)
     );
   }),
-  immerOn(TodoActions.deselectMany, (state: TodoState, { todos }) => {
+  immerOn(TodoActions.deselectMany, (state: TodoState, {todos}) => {
     _.remove(state.selectedIds, (id) => todos.map((t) => t.id).includes(id));
-  })
+  }),
+  immerOn(TodoActions.deleteSelected, (state: TodoState) => todoAdapter.removeMany(
+    state.selectedIds, state
+  ))
 );
