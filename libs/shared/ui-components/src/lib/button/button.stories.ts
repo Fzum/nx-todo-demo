@@ -1,10 +1,10 @@
-import { Meta, moduleMetadata, Story } from '@storybook/angular';
+import {Meta, moduleMetadata, Story} from '@storybook/angular';
 
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 
-import { action } from '@storybook/addon-actions';
-import { ButtonComponent } from './button.component';
-import { ButtonSeverity } from './button-severity';
+import {action} from '@storybook/addon-actions';
+import {ButtonComponent} from './button.component';
+import {ButtonIcons, ButtonSeverity} from './buttonSeverity';
 
 export default {
   component: ButtonComponent,
@@ -45,4 +45,25 @@ export const Danger = Template.bind({});
 Danger.args = {
   severity: ButtonSeverity.DANGER,
   txt: 'Danger',
+};
+
+export const IconTrash = Template.bind({});
+IconTrash.args = {
+  severity: ButtonSeverity.SECONDARY,
+  icon: ButtonIcons.TRASH,
+  txt: 'Trash',
+};
+
+export const IconPlus = Template.bind({});
+IconPlus.args = {
+  severity: ButtonSeverity.SECONDARY,
+  icon: ButtonIcons.PLUS,
+  txt: 'Plus',
+};
+
+export const IconPencil = Template.bind({});
+IconPencil.args = {
+  severity: ButtonSeverity.SECONDARY,
+  icon: ButtonIcons.PENCIL,
+  txt: 'Pencil',
 };

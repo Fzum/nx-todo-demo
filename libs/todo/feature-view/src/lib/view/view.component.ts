@@ -1,7 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {Todo, ViewFacade} from '@nx-todo-demo/todo/domain';
-import {ButtonSeverity} from '@nx-todo-demo/shared/ui-components';
-import {BehaviorSubject, combineLatest, first, map, withLatestFrom,} from 'rxjs';
+import {
+  ButtonIcons,
+  ButtonSeverity,
+} from '@nx-todo-demo/shared/ui-components';
+import {
+  BehaviorSubject,
+  combineLatest,
+  first,
+  map,
+  withLatestFrom,
+} from 'rxjs';
 import {FormControl} from '@angular/forms';
 
 @Component({
@@ -14,7 +23,9 @@ export class ViewComponent implements OnInit {
   selectedTodos$ = this.viewFacade.selectedTodos$;
 
   buttonSeverity = ButtonSeverity;
+  buttonIcons = ButtonIcons;
 
+  isEditingActivated = false;
   searchFc = new FormControl('');
   searchedTodos$ = new BehaviorSubject<Todo[]>([]);
 
@@ -88,7 +99,7 @@ export class ViewComponent implements OnInit {
   }
 
   isAnyTodoSelected$() {
-    return this.getSelectedTodos$().pipe(map(t => t.length > 0))
+    return this.getSelectedTodos$().pipe(map((t) => t.length > 0));
   }
 
   private getSelectedTodos$() {

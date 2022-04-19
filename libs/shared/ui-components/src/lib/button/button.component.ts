@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
-import { ButtonSeverity } from './button-severity';
+import {ButtonIcons, ButtonSeverity} from './buttonSeverity';
 
 @Component({
   selector: 'components-button',
@@ -10,8 +10,10 @@ import { ButtonSeverity } from './button-severity';
 export class ButtonComponent {
   @Input() severity = ButtonSeverity.PRIMARY;
   @Input() txt = 'Button';
+  @Input() icon = ButtonIcons.TRASH;
 
   @Output() clicked = new EventEmitter();
 
   severityEnum = ButtonSeverity;
+  iconEnum = ButtonIcons;
 }

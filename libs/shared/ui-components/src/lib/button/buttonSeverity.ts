@@ -3,3 +3,9 @@ export enum ButtonSeverity {
     PRIMARY,
     SECONDARY
 }
+
+export enum ButtonIcons {
+  PENCIL,
+  PLUS,
+  TRASH
+}
