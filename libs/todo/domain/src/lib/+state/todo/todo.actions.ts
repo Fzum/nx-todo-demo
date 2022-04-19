@@ -34,8 +34,3 @@ export const deselectMany = createAction(
   '[Todo Page] Deselect Many',
   props<{ todos: Todo[] }>()
 );
-
-export const searchTodo = createAction(
-  '[Todo Page] Search Todo',
-  props<{ searchTerm: string }>()
-);

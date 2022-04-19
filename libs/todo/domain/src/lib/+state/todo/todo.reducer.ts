@@ -12,7 +12,6 @@ export const TODO_FEATURE_KEY = 'todo-todo';
 export interface TodoState extends EntityState<Todo> {
   selectedIds: number[];
   isLoading: boolean;
-  searchedTodos: Todo[];
 }
 
 export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
@@ -20,7 +19,6 @@ export const todoAdapter: EntityAdapter<Todo> = createEntityAdapter<Todo>();
 export const initialState: TodoState = todoAdapter.getInitialState({
   selectedIds: [],
   isLoading: false,
-  searchedTodos: [],
 });
 
 export const todoReducer = createReducer(
@@ -43,7 +41,6 @@ export const todoReducer = createReducer(
       todo.id,
       produce(state, (draft) => {
         _.remove(draft.selectedIds, (t) => t === todo.id);
-        _.remove(draft.searchedTodos, (t) => t.id === todo.id);
       })
     )
   ),
@@ -64,10 +61,5 @@ export const todoReducer = createReducer(
   }),
   immerOn(TodoActions.deselectMany, (state: TodoState, { todos }) => {
     _.remove(state.selectedIds, (id) => todos.map((t) => t.id).includes(id));
-  }),
-  immerOn(TodoActions.searchTodo, (state: TodoState, { searchTerm }) => {
-    state.searchedTodos = (Object.values(state.entities) as Todo[]).filter(
-      (t) => t.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
   })
 );

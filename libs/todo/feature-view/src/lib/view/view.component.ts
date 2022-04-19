@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo, ViewFacade } from '@nx-todo-demo/todo/domain';
 import { ButtonSeverity } from '@nx-todo-demo/shared/ui-components';
-import { first, map, withLatestFrom } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  first,
+  map,
+  withLatestFrom,
+} from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -10,36 +16,49 @@ import { FormControl } from '@angular/forms';
 })
 export class ViewComponent implements OnInit {
   todos$ = this.viewFacade.todos$;
-  searchedTodos$ = this.viewFacade.searchedTodos$;
   isLoading$ = this.viewFacade.isLoading$;
-  isAllSearchedSelected$ = this.viewFacade.isAllSearchedSelected$;
-  isAllSelected$ = this.viewFacade.isAllSelected$;
   selectedTodos$ = this.viewFacade.selectedTodos$;
 
   buttonSeverity = ButtonSeverity;
 
   searchFc = new FormControl('');
+  searchedTodos$ = new BehaviorSubject<Todo[]>([]);
 
-  constructor(private viewFacade: ViewFacade) {
+  isAllSearchedSelected$ = new BehaviorSubject(false);
+
+  // todo unsubscribe and refactor
+  constructor(public viewFacade: ViewFacade) {
+    this.todos$.subscribe(this.searchedTodos$);
+
+    combineLatest([this.selectedTodos$, this.searchedTodos$])
+      .pipe(
+        map(([searched, selected]) => [
+          searched.map((s) => s.id),
+          selected.map((s) => s.id),
+        ])
+      )
+      .subscribe(([searchedIds, selectedIs]) =>
+        this.isAllSearchedSelected$.next(
+          selectedIs.every((id) => searchedIds.includes(id))
+        )
+      );
+
     this.searchFc.valueChanges.subscribe((searchTerm) =>
-      this.viewFacade.searchTodos(searchTerm)
+      this.todos$
+        .pipe(
+          map((todos) =>
+            todos.filter((t) =>
+              t.name.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          ),
+          first()
+        )
+        .subscribe((searchedTodos) => this.searchedTodos$.next(searchedTodos))
     );
   }
 
-  get searchTerm() {
-    return this.searchFc.value;
-  }
-
   ngOnInit() {
-    this.loadTodos();
-  }
-
-  loadTodos(): void {
     this.viewFacade.loadTodos();
-  }
-
-  delete(todo: Todo) {
-    this.viewFacade.delete(todo);
   }
 
   toggleSelection(todo: Todo) {
@@ -53,13 +72,17 @@ export class ViewComponent implements OnInit {
   }
 
   toggleManySelection() {
-    this.isAllSearchedSelected$
-      .pipe(first(), withLatestFrom(this.searchedTodos$))
-      .subscribe(([isAllSelected, searchedTodos]) => {
-        if (isAllSelected) {
-          this.viewFacade.deselectMany(searchedTodos);
+    this.searchedTodos$
+      .pipe(withLatestFrom(this.selectedTodos$), first())
+      .subscribe(([searched, selected]) => {
+        const isAllSearchedSelected = searched.every((t) =>
+          selected.includes(t)
+        );
+
+        if (isAllSearchedSelected) {
+          this.viewFacade.deselectMany(searched);
         } else {
-          this.viewFacade.selectMany(searchedTodos);
+          this.viewFacade.selectMany(searched);
         }
       });
   }

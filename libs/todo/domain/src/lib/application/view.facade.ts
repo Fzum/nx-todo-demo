@@ -6,7 +6,6 @@ import {
   deselectTodo,
   loadTodos,
   removeTodo,
-  searchTodo,
   selectMany,
   selectTodo,
 } from '../+state/todo/todo.actions';
@@ -21,17 +20,8 @@ export class ViewFacade {
     TodoSelectors.getIsTodoLoading
   );
   todos$: Observable<Todo[]> = this.store.select(TodoSelectors.getAllTodo);
-  searchedTodos$: Observable<Todo[]> = this.store.select(
-    TodoSelectors.getSearchedTodos
-  );
   selectedTodos$: Observable<Todo[]> = this.store.select(
     TodoSelectors.getSelected
-  );
-  isAllSearchedSelected$: Observable<boolean> = this.store.select(
-    TodoSelectors.isAllSearchedSelected
-  );
-  isAllSelected$: Observable<boolean> = this.store.select(
-    TodoSelectors.isAllSelected
   );
 
   constructor(private store: Store<fromTodo.TodoState>) {}
@@ -58,9 +48,5 @@ export class ViewFacade {
 
   deselectMany(todos: Todo[]) {
     this.store.dispatch(deselectMany({ todos }));
-  }
-
-  searchTodos(searchTerm: string) {
-    this.store.dispatch(searchTodo({ searchTerm }));
   }
 }
